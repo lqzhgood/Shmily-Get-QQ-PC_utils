@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "dayjs": "^1.10.6",
+    "fs-extra": "^10.0.0",
+    "lodash": "^4.17.21"
+  },
+  "nodemonConfig": {
+    "ignore": [
+        "json/*"
+    ]
+}
+}

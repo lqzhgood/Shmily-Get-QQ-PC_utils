@@ -1,0 +1,80 @@
+const { dbSlice } = require('./lib.js');
+
+const s = {
+    source: 'QQ',
+    device: 'PC',
+    type: '消息',
+    direction: 'come',
+    sender: '119',
+    senderName: 'name',
+    receiver: '110',
+    receiverName: 'null',
+    day: '2017-12-30',
+    time: '19:38:06',
+    ms: 1514633886000,
+    content: '开门咯',
+    html: '开门咯',
+    _Dev: {
+        same: 2,
+    },
+    id: 'msg-qq-pc.json_2017-12-30_19-38-06_c_8154c6_1',
+    index: 212571,
+};
+
+const c = {
+    source: 'MobileQQ',
+    device: 'OnePlus 3T',
+    type: '消息',
+    direction: 'come',
+    sender: '119',
+    senderName: 'name',
+    receiver: '110',
+    receiverName: 'null',
+    day: '2017-12-30',
+    time: '19:38:06',
+    ms: 1514633886000,
+    content: '开门咯',
+    html: '开门咯',
+    $MobileQQ: {
+        os: 'Android',
+        raw: {
+            _id: 811,
+            extInt: 0,
+            extLong: 0,
+            extStr: '',
+            extraflag: 0,
+            frienduin: '119',
+            isValid: 1,
+            isread: 1,
+            issend: 0,
+            istroop: 0,
+            longMsgCount: 1,
+            longMsgId: 0,
+            longMsgIndex: 0,
+            msgData: {
+                type: 'Buffer',
+            },
+            msgId: 0,
+            msgUid: '72057594689842545',
+            msgseq: 1514633886,
+            msgtype: -1000,
+            selfuin: '110',
+            sendFailCode: 0,
+            senderuin: '119',
+            shmsgseq: 3241,
+            sourceType: 0,
+            time: 1514633886,
+            uniseq: '6505357046410079940',
+            versionCode: 3,
+            vipBubbleID: 0,
+            $data: {
+                msgData: '开门咯',
+            },
+        },
+    },
+    id: 'msg-qq_android.json_2017-12-30_19-38-06_c_8154c6_1',
+    index: 212572,
+};
+
+const r = dbSlice(s, c);
+console.log('r', r);
