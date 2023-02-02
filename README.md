@@ -8,7 +8,7 @@
 
 安装 node 环境 [http://lqzhgood.github.io/Shmily/guide/setup-runtime/nodejs.html]
 
-### 合并相关
+## 合并相关
 
 如果有多份聊天记录(多个设备上导出的), 并且这些聊天记录上有交集, 那么可以用下面的工具将交集部分拆分出来, 进行对比后, 再合并
 
@@ -21,9 +21,11 @@
 -   4 diff
     对比两个数据文件哪里不同
 
-### 修复一些聊天记录的问题
+## 修复一些聊天记录的问题
 
-#### 5 fix
+### 5 fix
+
+仅限 PC-QQ
 
 -   修复
 
@@ -44,7 +46,7 @@
     -   checkAllImg.js 检查数据文件中的图片是否全部存在
     -   watchState 实时输出放入 input 文件夹中的图片信息
 
-#### 6 slice PC 移动版 去重
+### 6 slice PC 移动版 去重
 
 MobileQQ 发送一条消息后, 登录 QQ-PC 后会同步这条消息, 导致 QQ-PC 和 MobileQQ 分别导出的数据文件存在重复消息
 
