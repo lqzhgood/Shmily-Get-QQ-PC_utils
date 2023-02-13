@@ -69,3 +69,11 @@ MobileQQ 发送一条消息后, 登录 QQ-PC 后会同步这条消息, 导致 QQ
                 Mobile 哈哈
                 Mobile 哈哈
             ```
+
+## 感谢
+
+http://lqzhgood.github.io/Shmily/guide/other/thanks.html
+
+## 捐赠
+
+点击链接 http://lqzhgood.github.io/Shmily/guide/other/donation.html 看世界上最可爱的动物

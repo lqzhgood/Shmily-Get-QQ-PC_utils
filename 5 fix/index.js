@@ -39,7 +39,7 @@ msgArr.forEach((m, i) => {
     //     console.warn('文件可能未识别', m);
     // }
 
-    if (m.type === '文件' && !_.get(m, '$QQ.fileParse')) {
+    if (m.type === '文件' && !_.get(m, '$QQ.data.fileParse')) {
         console.warn('❌', '文件无属性', m);
     }
 });

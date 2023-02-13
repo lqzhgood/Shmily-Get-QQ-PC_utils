@@ -246,20 +246,20 @@ function file(m, i, msgArr) {
 
 function fileRegMatch(m, reg, finFn) {
     if (!reg.test(m.content)) return;
-    // if (m.type == '文件' || _.get(m, '$QQ.fileParse')) {
+    // if (m.type == '文件' || _.get(m, '$QQ.data.fileParse')) {
     //     console.warn('❌', '重复识别到 文件 类型, 正则匹配有重复', m);
     // }
 
     testTime(m);
     m.type = '文件';
-    _.set(m, '$QQ.fileParse', {});
+    _.set(m, '$QQ.data.fileParse', {});
     try {
         let [str, name, size] = m.content.match(reg);
         if (name) name = name.replace(/^\“/, '').replace(/\”$/, '');
         if (size) size = size.replace(/^\(/, '').replace(/\)$/, '');
         if (name || size) {
             const { ext } = path.parse(name);
-            _.set(m, '$QQ.fileParse', { name, size, ext: ext.toLowerCase() });
+            _.set(m, '$QQ.data.fileParse', { name, size, ext: ext.toLowerCase() });
         }
     } catch (error) {
         console.log('error.message', error.message, m.content);
@@ -269,12 +269,12 @@ function fileRegMatch(m, reg, finFn) {
 }
 
 function fixFileParse(m, i, msgArr) {
-    if (_.get(m, '$QQ.fileParse') && !('base' in m.$QQ.fileParse)) {
-        const { ext, name, base } = path.parse(m.$QQ.fileParse.name || '');
-        m.$QQ.fileParse.ext = ext.toLowerCase();
-        m.$QQ.fileParse.name = name;
-        m.$QQ.fileParse.base = base;
-        m.$QQ.fileParse.url = `./data/qq-pc/file/${encodeURIComponent(base)}`;
+    if (_.get(m, '$QQ.data.fileParse') && !('base' in m.$QQ.data.fileParse)) {
+        const { ext, name, base } = path.parse(m.$QQ.data.fileParse.name || '');
+        m.$QQ.data.fileParse.ext = ext.toLowerCase();
+        m.$QQ.data.fileParse.name = name;
+        m.$QQ.data.fileParse.base = base;
+        m.$QQ.data.fileParse.url = `./data/qq-pc/file/${encodeURIComponent(base)}`;
     }
     clearFileNameSpace(m);
 }
@@ -283,16 +283,16 @@ const HAS_FILES = [];
 const LOST_FILES = [];
 
 function clearFileNameSpace(m) {
-    if (_.get(m, '$QQ.fileParse.base')) {
+    if (_.get(m, '$QQ.data.fileParse.base')) {
         // 修复json和实际文件的文件名中的 0x0a 不间断空格
         // if (fs.existsSync(`${FILE_DIR_TARGET}/${f}`)) {
-        const _f = _.get(m, '$QQ.fileParse.base', '');
+        const _f = _.get(m, '$QQ.data.fileParse.base', '');
         if (!_f) return;
 
         const f = clearStrSpace(_f);
         const find = FILES_ATTACHMENT.find(v => v.n == f);
         if (find) {
-            _.set(m, '$QQ.fileParse.base', f);
+            _.set(m, '$QQ.data.fileParse.base', f);
             HAS_FILES.push(f);
             fs.copySync(path.join(FILE_DIR_TARGET, find.o), path.join(__dirname, '../dist/file/', f), {
                 preserveTimestamps: true,
@@ -300,9 +300,9 @@ function clearFileNameSpace(m) {
 
             // 说明 json 中有不间断空格 ' ' ，需要修复
             if (_f.includes(String.fromCharCode('0xa0'))) {
-                m.$QQ.fileParse.base = clearStrSpace(m.$QQ.fileParse.base);
-                m.$QQ.fileParse.name = clearStrSpace(m.$QQ.fileParse.name);
-                m.$QQ.fileParse.url = `./data/qq-pc/file/${encodeURIComponent(m.$QQ.fileParse.base)}`;
+                m.$QQ.data.fileParse.base = clearStrSpace(m.$QQ.data.fileParse.base);
+                m.$QQ.data.fileParse.name = clearStrSpace(m.$QQ.data.fileParse.name);
+                m.$QQ.data.fileParse.url = `./data/qq-pc/file/${encodeURIComponent(m.$QQ.data.fileParse.base)}`;
 
                 console.warn('❌', '不间断空格 "%C2%A0" 需要测试', f, m.day, m.time);
             }
